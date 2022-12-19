@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygen-scaffold"
+version = "0.0.1"
+authors = [
+  { name="Omar Crosby", email="omar.crosby@gmail.com" },
+]
+description = "A python program for scaffolding python projects."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License (GPL)",
+    "Operating System :: OS Independent",
+]
+keywords = [
+    "scaffold"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ocrosby/pygen-scaffold"
+"Bug Tracker" = "https://github.com/ocrosby/pygen-scaffold/issues"
+
+
+[tool.flake8]
+ignore = ['C901', 'E203', 'F401', 'W503']
+max-line-length = 88
+exclude = ['.env', '.venv', '.env', 'env', 'migrations', '__pycache__', 'manage.py', 'settings.py']
+
+[tool.semantic_release]
+version_source = "commit"
+version_variable = [
+    "src/pygen-scaffold/__init__.py:__version__"
+]
+version_toml = [
+    "pyproject.toml:project.version",
+    "pyproject.toml:tool.poetry.version"
+]
+version_pattern = [
+    "README.md:rev: v{version}"
+]
+major_on_zero = true
+branch = "main"
+upload_to_pypi = true
+upload_to_release = true
+commit_subject = "chore: release {version} [skip ci] ***NO_CI***"
+build_command = "python3 -m pip install --upgrade build && python3 -m build"
