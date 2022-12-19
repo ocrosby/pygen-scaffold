@@ -1,5 +1,12 @@
 # pygen-scaffold
+
 A python program for scaffolding python projects.
+
+![Test](https://github.com/ocrosby/pygen-scaffold/actions/workflows/ci.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/ocrosby/pygen-scaffold/badge.svg?branch=feature/init)](https://coveralls.io/github/ocrosby/pygen-scaffold?branch=feature/init)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+
 
 ## Setup
 
