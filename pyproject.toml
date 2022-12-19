@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygen-scaffold"
-version = "0.0.1"
+version = "0.0.0"
 authors = [
   { name="Omar Crosby", email="omar.crosby@gmail.com" },
 ]
@@ -36,12 +36,9 @@ version_variable = [
     "src/pygen-scaffold/__init__.py:__version__"
 ]
 version_toml = [
-    "pyproject.toml:project.version",
-    "pyproject.toml:tool.poetry.version"
+    "pyproject.toml:project.version"
 ]
-version_pattern = [
-    "README.md:rev: v{version}"
-]
+
 major_on_zero = true
 branch = "main"
 upload_to_pypi = true
