@@ -3,7 +3,7 @@ from invoke import task
 
 @task(aliases=["i"])
 def install(c):
-    c.run("pip install -r requirements.txt")
+    c.run("pip3 install .")
 
 
 @task(aliases=["u"])
