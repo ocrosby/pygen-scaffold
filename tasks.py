@@ -3,7 +3,7 @@ from invoke import task
 
 @task(aliases=["i"])
 def install(c):
-    c.run("pip3 install .")
+    c.run("pip3 install -e .")
 
 
 @task(aliases=["u"])
