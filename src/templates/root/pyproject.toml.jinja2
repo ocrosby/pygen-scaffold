@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{ project_name }}"
+version = "{{ version }}"
+authors = [
+  { name="{{ author }}", email="{{ author_email }}" },
+]
+description = "A python program for scaffolding python projects."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License (GPL)",
+    "Operating System :: OS Independent",
+]
+keywords = [
+    "scaffold"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/{{ github_username }}/{{ project_name }}"
+"Bug Tracker" = "https://github.com/{{ github_username }}/{{ project_name }}/issues"
+
+[project.scripts]
+pygen = "{{ project_name }}.__main__:main"
+
+[tool.flake8]
+ignore = ['C901', 'E203', 'F401', 'W503']
+max-line-length = 88
+exclude = ['.env', '.venv', '.env', 'env', 'migrations', '__pycache__', 'manage.py', 'settings.py']
+
+[tool.semantic_release]
+version_source = "commit"
+version_variable = [
+    "api/__init__.py:__version__"
+]
+version_toml = [
+    "pyproject.toml:project.version"
+]
+
+major_on_zero = true
+branch = "main"
+upload_to_pypi = true
+upload_to_release = true
+commit_subject = "chore: release {version} [skip ci] ***NO_CI***"
+build_command = "python3 -m pip install --upgrade build && python3 -m build"

@@ -1,0 +1,11 @@
+from http import HTTPStatus
+from urllib.error import HTTPError
+
+from flask import Blueprint, jsonify, request, abort
+
+blueprint = Blueprint("clubs", __name__, url_prefix="/hello")
+
+
+@blueprint.route("/", methods=["GET"])
+def get_hello():
+    return jsonify({"message": "Hello World!"})

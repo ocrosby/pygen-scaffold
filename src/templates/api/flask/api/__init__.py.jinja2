@@ -1,0 +1,33 @@
+from flask import Blueprint, flask
+from flask_cors import CORS
+from common.extensions import cache
+
+from .hello import blueprint as hello_blueprint
+
+__version__ = '{{ version }}'
+
+blueprint = Blueprint("api", __name__, url_prefix="/api")
+
+api = Api(
+    blueprint,
+    title="Flask Seed",
+    version="1.0",
+    description="A description",
+)
+
+api.add_namespace(hello_blueprint, path="/example")
+
+config = {
+    "DEBUG": True,
+    "CACHE_TYPE": "simple",
+    "CACHE_DEFAULT_TIMEOUT": 300,
+}
+
+app = Flask(__name__)
+
+app.config.from_mapping(config)
+cache.init_app(app, config)
+
+app.register_blueprint(blueprint)
+
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
