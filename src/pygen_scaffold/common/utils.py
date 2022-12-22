@@ -1,5 +1,7 @@
 from os import mkdir
-from os.path import isfile, isdir
+from os.path import isfile, isdir, join
+
+import jinja2
 from yaml import FullLoader
 from yaml import load as yaml_load
 from json import dump as json_dump
@@ -215,3 +217,66 @@ def urljoin(base: str | None, path: str | None) -> str:
         path = path[1:]
 
     return str(f"{base}/{path}")
+
+
+def read_file(file_path: str | None) -> str | None:
+    """
+    Read a file.
+    :param file_path:
+    :return:
+    """
+    if file_path is None:
+        return None
+
+    if not file_exists(file_path):
+        return None
+
+    with open(file_path, "r") as file:
+        return file.read()
+
+
+def write_file(file_path: str | None, data: str | None):
+    """
+    Write a file.
+    :param file_path:
+    :param data:
+    :return:
+    """
+    if file_path is None:
+        raise ValueError("Undefined file path!")
+
+    if data is None:
+        raise ValueError("Undefined data!")
+
+    with open(file_path, "w") as file:
+        file.write(data)
+
+
+class TemplateExecutor:
+    def __init__(self, root_directory: str, project_directory: str, data: dict):
+        self.root_directory = root_directory
+        self.project_directory = project_directory
+        self.data = data
+
+    def generate_output_path(self, template_file: str):
+        """Generate the output file path for a given template file path."""
+        suffix = template_file.replace(self.root_directory, "")
+
+        if suffix.startswith("/"):
+            suffix = suffix[1:]
+
+        suffix = suffix.replace(".jinja2", "")
+
+        output_file = join(self.project_directory, suffix)
+
+        return output_file
+
+    def apply(self, template: str):
+        print(f"Applying template '{template}' ...")
+
+        output_file = self.generate_output_path(template)
+
+        content = read_file(template)
+        template = jinja2.Template(content)
+        content = template.render(self.data)
+        write_file(output_file, content)
