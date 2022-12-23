@@ -1,0 +1,2 @@
+include src/pygen_scaffold/*.*
+include src/templates/*.jinja2

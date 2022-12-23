@@ -27,6 +27,13 @@ keywords = [
 [project.scripts]
 pygen = "pygen_scaffold.__main__:main"
 
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.flake8]
 ignore = ['C901', 'E203', 'F401', 'W503']
 max-line-length = 88
