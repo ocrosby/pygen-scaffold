@@ -56,7 +56,21 @@ def api(name: str):
     click.echo("Overlaying root files ...")
     root_directory = "src/templates/root"
     executor = utils.TemplateExecutor(root_directory, project_dir, data)
-    for root, dirs, files in os.walk("src/templates/root", topdown=True):
+    for root, dirs, files in os.walk(root_directory, topdown=True):
+        for name in dirs:
+            idir = os.path.join(root, name)
+            odir = executor.generate_output_path(idir)
+            utils.create_directory(odir)
+
+        for name in files:
+            ifile = os.path.join(root, name)
+            executor.apply(ifile)
+
+    click.echo()
+    click.echo("Overlaying github files ...")
+    root_directory = "src/templates/github"
+    executor = utils.TemplateExecutor(root_directory, project_dir, data)
+    for root, dirs, files in os.walk(root_directory, topdown=True):
         for name in dirs:
             idir = os.path.join(root, name)
             odir = executor.generate_output_path(idir)
