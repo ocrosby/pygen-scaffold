@@ -39,8 +39,6 @@ class StopWatch:
         return f"{delta:.2f} seconds"
 
 
-
-
 def convert_yaml_to_json(yaml_file_path: str, json_file_path: str, logger: any = None):
     """
     Converts a yaml file to JSON.
@@ -53,7 +51,6 @@ def convert_yaml_to_json(yaml_file_path: str, json_file_path: str, logger: any =
 
     try:
         with open(yaml_file_path) as yaml_file:
-            #yaml_data = yaml.safe_load(yaml_file)
             logger.info(f"Loading YAML file '{yaml_file_path}' ...")
             yaml_data = yaml_load(yaml_file, Loader=FullLoader)
             logger.info(f"YAML file '{yaml_file_path}' successfully loaded.")

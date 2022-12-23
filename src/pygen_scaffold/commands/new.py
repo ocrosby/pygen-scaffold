@@ -1,6 +1,5 @@
 import os
 import click
-import jinja2
 
 from pygen_scaffold.common import utils
 
@@ -9,6 +8,19 @@ from pygen_scaffold.common import utils
 def cli():
     """Create a new project."""
     pass
+
+
+def overlay_directory(root_directory: str, project_dir, data):
+    executor = utils.TemplateExecutor(root_directory, project_dir, data)
+    for root, dirs, files in os.walk(root_directory, topdown=True):
+        for name in dirs:
+            idir = os.path.join(root, name)
+            odir = executor.generate_output_path(idir)
+            utils.create_directory(odir)
+
+        for name in files:
+            ifile = os.path.join(root, name)
+            executor.apply(ifile)
 
 
 @cli.command()
@@ -40,49 +52,17 @@ def api(name: str):
 
     click.echo("Overlaying flask api files ...")
     root_directory = "src/templates/api/flask"
-    executor = utils.TemplateExecutor(root_directory, project_dir, data)
-    for root, dirs, files in os.walk(root_directory, topdown=True):
-        for name in dirs:
-            idir = os.path.join(root, name)
-            odir = executor.generate_output_path(idir)
-            utils.create_directory(odir)
-
-        for name in files:
-            ifile = os.path.join(root, name)
-            executor.apply(ifile)
-
+    overlay_directory(root_directory, project_dir, data)
 
     click.echo()
     click.echo("Overlaying root files ...")
     root_directory = "src/templates/root"
-    executor = utils.TemplateExecutor(root_directory, project_dir, data)
-    for root, dirs, files in os.walk(root_directory, topdown=True):
-        for name in dirs:
-            idir = os.path.join(root, name)
-            odir = executor.generate_output_path(idir)
-            utils.create_directory(odir)
-
-        for name in files:
-            ifile = os.path.join(root, name)
-            executor.apply(ifile)
+    overlay_directory(root_directory, project_dir, data)
 
     click.echo()
     click.echo("Overlaying github files ...")
     root_directory = "src/templates/github"
-    executor = utils.TemplateExecutor(root_directory, project_dir, data)
-    for root, dirs, files in os.walk(root_directory, topdown=True):
-        for name in dirs:
-            idir = os.path.join(root, name)
-            odir = executor.generate_output_path(idir)
-            utils.create_directory(odir)
-
-        for name in files:
-            ifile = os.path.join(root, name)
-            executor.apply(ifile)
-
-
-
-
+    overlay_directory(root_directory, project_dir, data)
 
 
 @cli.command()
@@ -125,7 +105,6 @@ def cmd(name: str):
         for name in files:
             ifile = os.path.join(root, name)
             executor.apply(ifile)
-
 
     click.echo()
     click.echo("Overlaying root files ...")
@@ -182,7 +161,6 @@ def module(name: str):
             ifile = os.path.join(root, name)
             executor.apply(ifile)
 
-
     click.echo()
     click.echo("Overlaying root files ...")
     root_directory = "src/templates/root"
@@ -196,4 +174,3 @@ def module(name: str):
         for name in files:
             ifile = os.path.join(root, name)
             executor.apply(ifile)
-

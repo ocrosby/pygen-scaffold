@@ -82,7 +82,3 @@ class TestTemplateExecutor:
         output_path = executor.generate_output_path(input_path)
 
         assert output_path == "test1/bin"
-
-
-
-

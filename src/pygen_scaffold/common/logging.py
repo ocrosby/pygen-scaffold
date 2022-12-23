@@ -1,6 +1,7 @@
 import click
 import logging
 
+
 class DebugLogger:
     def __init__(self):
         self._container = {
