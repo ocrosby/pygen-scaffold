@@ -54,21 +54,6 @@ class TestUrlJoin:
         assert utils.urljoin("", "path/") == "path/"
 
 
-
-class TestCreateJinja2OutputPath:
-    def test_case_1(self):
-        # Arrange
-        root = "src/templates/api/flask"
-        input_path = "src/templates/api/flask/bin/run.sh.jinja2"
-        destination_dir = "/Users/omarcrosby/Source/pygen-scaffold/test1"
-
-        # Act
-        actual = utils.create_jinja2_output_path(root, input_path, destination_dir)
-        expected = "/Users/omarcrosby/Source/pygen-scaffold/test1/bin/run.sh"
-
-        assert actual == expected
-
-
 class TestTemplateExecutor:
     def test_generate_output_path_file(self):
         root_directory = "src/templates/api/flask"
