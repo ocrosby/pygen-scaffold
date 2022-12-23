@@ -43,7 +43,7 @@ jobs:
         run: |
           python -m invoke lint
 
-      - name: Set PYTHONPATHSE
+      - name: Set PYTHONPATH
         run: |
           echo "PYTHONPATH=src" >> $GITHUB_ENV          
 
