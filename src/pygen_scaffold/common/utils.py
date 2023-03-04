@@ -268,10 +268,18 @@ class TemplateExecutor:
 
         return output_file
 
-    def apply(self, template: str):
+    def apply(self, template: str, output_file: str = None):
+        """
+        Applies the specified jinja template.
+
+        :param template: The template file path.
+        :param output_file: The output file path. If not specified, the output file path will be generated from the template file path.
+        :return:
+        """
         print(f"Applying template '{template}' ...")
 
-        output_file = self.generate_output_path(template)
+        if output_file is None:
+            output_file = self.generate_output_path(template)
 
         content = read_file(template)
         template = jinja2.Template(content)

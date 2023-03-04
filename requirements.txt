@@ -1,4 +1,7 @@
+bs4
+requests
 click
 PyYAML
 wget
 jinja2
+dependency-injector
